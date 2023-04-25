@@ -1,0 +1,13 @@
+server:
+  port: 9100
+
+spring:
+  application:
+    name: simple-service
+  cloud:
+    nacos:
+      server-addr: 172.100.1.100:8848
+      username: nacos
+      password: nacos
+      discovery:
+        namespace: gateway
