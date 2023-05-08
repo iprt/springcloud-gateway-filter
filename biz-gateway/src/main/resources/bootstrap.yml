@@ -1,0 +1,36 @@
+server:
+  port: 10001
+
+spring:
+  application:
+    name: biz-gateway
+  profiles:
+    active: wr,ed
+  cloud:
+    nacos:
+      server-addr: 172.100.1.100:8848
+      username: nacos
+      password: nacos
+      discovery:
+        namespace: gateway
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+          # routing role
+          lower-case-service-id: true
+      biz-external:
+        wrapper:
+          ignore:
+            - Wrapper-Ignore
+        encrypt-decrypt-filter:
+          # 约定的 query string 的 key
+          query-param: data
+          app-json-key: data
+          ignore:
+            - service: simple-service
+              uri:
+                - /getMapWithOutEncryptDecrypt
+logging:
+  level:
+    org.springframework.cloud.gateway: trace

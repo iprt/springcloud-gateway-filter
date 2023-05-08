@@ -1,4 +1,5 @@
 rootProject.name = 'springcloud-gateway-filter'
 
+include('biz-gateway')
 include('gateway')
 include('simple-service')
