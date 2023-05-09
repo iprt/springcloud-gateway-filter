@@ -1,8 +1,8 @@
 package org.iproute.biz.gateway.exception.bizjson;
 
 
-import org.iproute.biz.gateway.exception.GatewayFail;
 import lombok.extern.slf4j.Slf4j;
+import org.iproute.biz.gateway.exception.GatewayFail;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.reactive.error.ErrorWebExceptionHandler;
 import org.springframework.context.annotation.Conditional;
