@@ -1,4 +1,4 @@
-package org.iproute.biz.gateway.config.filters.predicate.rewriter.components;
+package org.iproute.biz.gateway.config.filters.predicate.rewriter.components.wrapper;
 
 import org.iproute.biz.gateway.config.filters.predicate.BizPredicate;
 import org.springframework.http.HttpStatus;

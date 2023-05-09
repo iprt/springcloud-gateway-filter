@@ -40,17 +40,19 @@ public interface BizRewriteFunction extends RewriteFunction<byte[], byte[]> {
      */
     Publisher<byte[]> bizApply(ServerWebExchange exchange, byte[] bytes);
 
+    default boolean requireEmptyBytes() {
+        return false;
+    }
 
     @Override
     default Publisher<byte[]> apply(ServerWebExchange exchange, byte[] bytes) {
-        if (bytes == null || bytes.length == 0) {
+        if (!requireEmptyBytes() && (bytes == null || bytes.length == 0)) {
             return Mono.empty();
         }
 
         if (useBiz(exchange)) {
             return bizApply(exchange, bytes);
         }
-
         // do noting
         return Mono.just(bytes);
     }

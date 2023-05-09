@@ -36,9 +36,9 @@ public class BizPredicateConfig {
 
     @Bean(name = "encryptDecryptFilterPredicateChain")
     public BizPredicate encryptDecryptFilterPredicateChain() {
-        log.info("BizPredicate Class : {}", reqContentTypeFilterPredicate.getClass());
-        log.info("BizPredicate Class : {}", reqUriFilterPredicate.getClass());
-        log.info("BizPredicate Class : {}", reqWebSocketFilterPredicate.getClass());
+        log.info("Class :: {}", reqContentTypeFilterPredicate.getClass());
+        log.info("Class : {}", reqUriFilterPredicate.getClass());
+        log.info("Class : {}", reqWebSocketFilterPredicate.getClass());
 
         return BizPredicateChain.create(BizPredicateChain.Strategy.AND)
                 .addFilterPredicate(reqContentTypeFilterPredicate)
@@ -72,10 +72,10 @@ public class BizPredicateConfig {
 
     @Bean(name = "wrapperRewriterPredicateChain")
     public BizPredicate wrapperRewriterPredicateChain() {
-        log.info("BizPredicate Class : {}", respHttpCodeRewritePredicate.getClass());
-        log.info("BizPredicate Class : {}", respIgnoreHeaderRewritePredicate.getClass());
-        log.info("BizPredicate Class : {}", respContentTypeRewritePredicate.getClass());
-        log.info("BizPredicate Class : {}", respWebSocketRewritePredicate.getClass());
+        log.info("Class : {}", respHttpCodeRewritePredicate.getClass());
+        log.info("Class : {}", respIgnoreHeaderRewritePredicate.getClass());
+        log.info("Class : {}", respContentTypeRewritePredicate.getClass());
+        log.info("Class : {}", respWebSocketRewritePredicate.getClass());
 
         return BizPredicateChain.create(BizPredicateChain.Strategy.AND)
                 .addFilterPredicate(respHttpCodeRewritePredicate)
@@ -89,7 +89,7 @@ public class BizPredicateConfig {
 
     @Bean
     public BizPredicate respEncryptDecryptRewriterPredicateChain() {
-        log.info("BizPredicate Class : {}", edRespContentTypeRewritePredicate.getClass());
+        log.info("Class : {}", edRespContentTypeRewritePredicate.getClass());
         return BizPredicateChain.create(BizPredicateChain.Strategy.AND)
                 .addFilterPredicate(edRespContentTypeRewritePredicate);
     }
@@ -100,7 +100,7 @@ public class BizPredicateConfig {
 
     @Bean
     public BizPredicate reqQueryParamEncryptDecryptFilterPredicateChain() {
-        log.info("BizPredicate Class : {}", reqQueryParamFilterPredicate.getClass());
+        log.info("Class : {}", reqQueryParamFilterPredicate.getClass());
         return BizPredicateChain.create(BizPredicateChain.Strategy.AND)
                 .addFilterPredicate(reqQueryParamFilterPredicate);
     }
@@ -112,7 +112,7 @@ public class BizPredicateConfig {
     // app 用的 request body 的predicate
     @Bean
     public BizPredicate jsonContentTypeFilterPredicateChain() {
-        log.info("BizPredicate Class : {}", reqJsonContentTypeFilterPredicate.getClass());
+        log.info("Class : {}", reqJsonContentTypeFilterPredicate.getClass());
         return BizPredicateChain.create(BizPredicateChain.Strategy.AND)
                 .addFilterPredicate(reqJsonContentTypeFilterPredicate)
                 .addFilterPredicate(reqUriFilterPredicate);
@@ -123,7 +123,7 @@ public class BizPredicateConfig {
 
     @Bean
     public BizPredicate backContentTypeFilterPredicateChain() {
-        log.info("BizPredicate Class : {}", reqBackContentTypeFilterPredicate.getClass());
+        log.info("Class : {}", reqBackContentTypeFilterPredicate.getClass());
         return BizPredicateChain.create(BizPredicateChain.Strategy.AND)
                 .addFilterPredicate(reqBackContentTypeFilterPredicate)
                 .addFilterPredicate(reqUriFilterPredicate);

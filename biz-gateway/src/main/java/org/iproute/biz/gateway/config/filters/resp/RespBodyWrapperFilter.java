@@ -7,7 +7,6 @@ import org.springframework.cloud.gateway.filter.GatewayFilter;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.factory.rewrite.ModifyResponseBodyGatewayFilterFactory;
 import org.springframework.context.annotation.Profile;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
@@ -31,7 +30,8 @@ public class RespBodyWrapperFilter implements BizGlobalFilter {
                 new ModifyResponseBodyGatewayFilterFactory.Config()
                         .setInClass(byte[].class)
                         .setOutClass(byte[].class)
-                        .setNewContentType(MediaType.APPLICATION_JSON.toString())
+                        // todo: failed ???
+                        // .setNewContentType(MediaType.APPLICATION_JSON_VALUE)
                         .setRewriteFunction(respBodyWrapperRewriter)
 
         );
@@ -44,8 +44,18 @@ public class RespBodyWrapperFilter implements BizGlobalFilter {
 
     @Override
     public Mono<Void> bizFilter(ServerWebExchange exchange, GatewayFilterChain chain) {
+        // post attribute
+        this.postAttribute(exchange);
         return delegate.filter(exchange, chain);
     }
 
+    /**
+     * 传递值
+     *
+     * @param exchange the exchange
+     */
+    private void postAttribute(ServerWebExchange exchange) {
+        exchange.getAttributes().put(BizGatewayApplication.TransitAttribute.WRAPPED, true);
+    }
 
 }

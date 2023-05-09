@@ -65,12 +65,27 @@ public class RespBodyWrapperRewriter implements BizRewriteFunction {
         return this.wrapperRewriterPredicateChain;
     }
 
+
+    @Override
+    public boolean requireEmptyBytes() {
+        return true;
+    }
+
     @Override
     public Publisher<byte[]> bizApply(ServerWebExchange exchange, byte[] bytes) {
         ServerHttpResponse response = exchange.getResponse();
+        this.fixHeader(response);
         return Mono.just(mutateServerHttpResponse(bytes, response));
     }
 
+    /**
+     * set content-type : application/json
+     *
+     * @param response the response
+     */
+    private void fixHeader(ServerHttpResponse response) {
+        response.getHeaders().setContentType(MediaType.APPLICATION_JSON);
+    }
 
     /**
      * wrapper

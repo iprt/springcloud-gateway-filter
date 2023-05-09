@@ -24,4 +24,9 @@ public class BizGatewayApplication {
         String WRAPPER = "wr";
         String ENCRYPT_DECRYPT = "ed";
     }
+
+    public interface TransitAttribute {
+        String WRAPPED = "WRAPPED";
+    }
+
 }

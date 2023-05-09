@@ -36,6 +36,8 @@ public class RespBodyEncryptFilter implements BizGlobalFilter {
                 new ModifyResponseBodyGatewayFilterFactory.Config()
                         .setInClass(byte[].class)
                         .setOutClass(byte[].class)
+                        // todo: not valid ???
+                        // .setNewContentType(MediaType.TEXT_PLAIN_VALUE)
                         .setRewriteFunction(respBodyEncryptRewriter)
         );
     }
