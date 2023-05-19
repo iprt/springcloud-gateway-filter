@@ -1,4 +1,4 @@
-package org.iproute.biz.gateway.filters.req;
+package org.iproute.biz.gateway.filters.reqFilter;
 
 import org.iproute.biz.gateway.BizGatewayApplication;
 import org.iproute.biz.gateway.filters.BizGlobalFilter;
@@ -17,7 +17,7 @@ import reactor.core.publisher.Mono;
  * @since 5/8/2023
  */
 @Profile(BizGatewayApplication.PROFILES.ENCRYPT_DECRYPT)
-@Component
+// @Component
 public class ReqRequireContentTypeFilter implements BizGlobalFilter {
 
     @Override

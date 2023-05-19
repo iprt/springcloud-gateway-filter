@@ -26,8 +26,8 @@ dependencyManagement {
 }
 
 dependencies {
-    implementation gradleApi()
-    implementation localGroovy()
+    // implementation gradleApi()
+    // implementation localGroovy()
 
     implementation 'org.apache.commons:commons-lang3:3.12.0'
     implementation 'com.alibaba:fastjson:1.2.83'
@@ -45,4 +45,8 @@ dependencies {
 
 tasks.named('test') {
     useJUnitPlatform()
+}
+
+task wrapper(type: Wrapper) {
+    distributionType = Wrapper.DistributionType.ALL
 }

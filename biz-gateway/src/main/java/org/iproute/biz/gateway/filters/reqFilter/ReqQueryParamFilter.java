@@ -1,4 +1,4 @@
-package org.iproute.biz.gateway.filters.req;
+package org.iproute.biz.gateway.filters.reqFilter;
 
 import lombok.AllArgsConstructor;
 import org.iproute.biz.gateway.BizGatewayApplication;

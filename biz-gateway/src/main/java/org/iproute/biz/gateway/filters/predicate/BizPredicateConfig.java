@@ -94,7 +94,6 @@ public class BizPredicateConfig {
                 .addFilterPredicate(edRespContentTypeRewritePredicate);
     }
 
-
     @Resource
     private BizPredicate reqQueryParamFilterPredicate;
 
@@ -102,7 +101,8 @@ public class BizPredicateConfig {
     public BizPredicate reqQueryParamEncryptDecryptFilterPredicateChain() {
         log.info("Class : {}", reqQueryParamFilterPredicate.getClass());
         return BizPredicateChain.create(BizPredicateChain.Strategy.AND)
-                .addFilterPredicate(reqQueryParamFilterPredicate);
+                .addFilterPredicate(reqQueryParamFilterPredicate)
+                .addFilterPredicate(reqUriFilterPredicate);
     }
 
     @Resource

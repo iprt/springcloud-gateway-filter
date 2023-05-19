@@ -1,4 +1,4 @@
-package org.iproute.biz.gateway.filters.req;
+package org.iproute.biz.gateway.filters.reqFilter;
 
 import org.iproute.biz.gateway.BizGatewayApplication;
 import org.iproute.biz.gateway.filters.BizGlobalFilter;
@@ -14,39 +14,39 @@ import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 
 /**
- * ReqBodyDecryptFilter
+ * ReqJsonBodyDecryptFilter
  *
  * @author zhuzhenjie
  * @since 5/1/2023
  */
 @Profile(BizGatewayApplication.PROFILES.ENCRYPT_DECRYPT)
 @Component
-public class ReqBodyDecryptFilter implements BizGlobalFilter {
-    private final BizPredicate backContentTypeFilterPredicateChain;
+public class ReqJsonBodyDecryptFilter implements BizGlobalFilter {
+    private final BizPredicate jsonContentTypeFilterPredicateChain;
     private final GatewayFilter delegate;
 
-    public ReqBodyDecryptFilter(@Qualifier("backContentTypeFilterPredicateChain") BizPredicate backContentTypeFilterPredicateChain,
-                                ModifyRequestBodyGatewayFilterFactory modifyRequestBodyGatewayFilterFactory,
-                                ReqBodyDecryptRewriter reqBodyDecryptRewriter) {
-        this.backContentTypeFilterPredicateChain = backContentTypeFilterPredicateChain;
+    public ReqJsonBodyDecryptFilter(@Qualifier("jsonContentTypeFilterPredicateChain") BizPredicate jsonContentTypeFilterPredicateChain,
+                                    ModifyRequestBodyGatewayFilterFactory modifyRequestBodyGatewayFilterFactory,
+                                    ReqJsonBodyDecryptRewriter reqJsonBodyDecryptRewriter) {
+        this.jsonContentTypeFilterPredicateChain = jsonContentTypeFilterPredicateChain;
         // if you need decrypt ,must convert to application/json
         this.delegate = modifyRequestBodyGatewayFilterFactory.apply(
                 new ModifyRequestBodyGatewayFilterFactory.Config()
                         .setInClass(byte[].class)
                         .setOutClass(byte[].class)
                         .setContentType(MediaType.APPLICATION_JSON.toString())
-                        .setRewriteFunction(reqBodyDecryptRewriter)
+                        .setRewriteFunction(reqJsonBodyDecryptRewriter)
         );
     }
 
     @Override
     public int getOrder() {
-        return -10;
+        return -11;
     }
 
     @Override
     public BizPredicate bizPredicate() {
-        return this.backContentTypeFilterPredicateChain;
+        return this.jsonContentTypeFilterPredicateChain;
     }
 
     @Override

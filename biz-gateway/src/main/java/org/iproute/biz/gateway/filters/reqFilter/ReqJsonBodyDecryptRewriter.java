@@ -1,8 +1,10 @@
-package org.iproute.biz.gateway.filters.req;
+package org.iproute.biz.gateway.filters.reqFilter;
 
+import com.alibaba.fastjson.JSONObject;
 import lombok.AllArgsConstructor;
 import org.iproute.biz.gateway.BizGatewayApplication;
 import org.iproute.biz.gateway.filters.BizRewriteFunction;
+import org.iproute.biz.gateway.filters.predicate.filter.properties.EncryptDecryptProperties;
 import org.iproute.biz.gateway.utils.EncryptDecrypt;
 import org.reactivestreams.Publisher;
 import org.springframework.context.annotation.Profile;
@@ -21,14 +23,16 @@ import java.nio.charset.StandardCharsets;
 @Profile(BizGatewayApplication.PROFILES.ENCRYPT_DECRYPT)
 @AllArgsConstructor
 @Component
-public class ReqBodyDecryptRewriter implements BizRewriteFunction {
+public class ReqJsonBodyDecryptRewriter implements BizRewriteFunction {
 
+    private final EncryptDecryptProperties encryptDecryptProperties;
     private final EncryptDecrypt encryptDecrypt;
 
     @Override
     public Publisher<byte[]> bizApply(ServerWebExchange exchange, byte[] bytes) {
-        String param = new String(bytes, StandardCharsets.UTF_8);
-        String decrypt = encryptDecrypt.decrypt(param);
+        String jsonStr = new String(bytes, StandardCharsets.UTF_8);
+        String encrypt = JSONObject.parseObject(jsonStr).getString(encryptDecryptProperties.getAppJsonKey());
+        String decrypt = encryptDecrypt.decrypt(encrypt);
         byte[] decryptBytes = decrypt.getBytes(StandardCharsets.UTF_8);
         return Mono.just(decryptBytes);
     }
