@@ -70,6 +70,11 @@ public class BizPredicateConfig {
     @Resource
     private BizPredicate respWebSocketRewritePredicate;
 
+    /**
+     * response 判断是否需要包装
+     *
+     * @return the biz predicate
+     */
     @Bean(name = "wrapperRewriterPredicateChain")
     public BizPredicate wrapperRewriterPredicateChain() {
         log.info("Class : {}", respHttpCodeRewritePredicate.getClass());
@@ -87,16 +92,27 @@ public class BizPredicateConfig {
     @Resource
     private BizPredicate edRespContentTypeRewritePredicate;
 
+    /**
+     * response 判断段是否需要加解密
+     *
+     * @return the biz predicate
+     */
     @Bean
     public BizPredicate respEncryptDecryptRewriterPredicateChain() {
         log.info("Class : {}", edRespContentTypeRewritePredicate.getClass());
         return BizPredicateChain.create(BizPredicateChain.Strategy.AND)
-                .addFilterPredicate(edRespContentTypeRewritePredicate);
+                .addFilterPredicate(edRespContentTypeRewritePredicate)
+                .addFilterPredicate(reqUriFilterPredicate);
     }
 
     @Resource
     private BizPredicate reqQueryParamFilterPredicate;
 
+    /**
+     * request query param 判断是否需要加解密
+     *
+     * @return the biz predicate
+     */
     @Bean
     public BizPredicate reqQueryParamEncryptDecryptFilterPredicateChain() {
         log.info("Class : {}", reqQueryParamFilterPredicate.getClass());
@@ -109,7 +125,11 @@ public class BizPredicateConfig {
     private BizPredicate reqJsonContentTypeFilterPredicate;
 
 
-    // app 用的 request body 的predicate
+    /**
+     * 特殊的场景，app单独使用
+     *
+     * @return the biz predicate
+     */
     @Bean
     public BizPredicate jsonContentTypeFilterPredicateChain() {
         log.info("Class : {}", reqJsonContentTypeFilterPredicate.getClass());
@@ -121,6 +141,11 @@ public class BizPredicateConfig {
     @Resource
     private BizPredicate reqBackContentTypeFilterPredicate;
 
+    /**
+     * Back content type filter predicate chain biz predicate.
+     *
+     * @return the biz predicate
+     */
     @Bean
     public BizPredicate backContentTypeFilterPredicateChain() {
         log.info("Class : {}", reqBackContentTypeFilterPredicate.getClass());
