@@ -5,7 +5,8 @@ spring:
   application:
     name: biz-gateway
   profiles:
-    active: wr,ed
+    # active: wr,ed
+    active: wr
   cloud:
     nacos:
       server-addr: 172.100.1.100:8848
