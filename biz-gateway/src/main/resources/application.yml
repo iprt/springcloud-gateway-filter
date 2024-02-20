@@ -6,7 +6,8 @@ spring:
     name: biz-gateway
   profiles:
     # active: wr,ed
-    active: wr
+    active:
+      - wr
   cloud:
     nacos:
       server-addr: 172.100.1.100:8848
@@ -32,6 +33,9 @@ spring:
             - service: simple-service
               uri:
                 - /getMapWithOutEncryptDecrypt
+
 logging:
   level:
-    org.springframework.cloud.gateway: trace
+    org.springframework.cloud.gateway: info
+
+

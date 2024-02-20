@@ -1,4 +1,4 @@
-package org.iproute.biz.gateway.exception;
+package org.iproute.biz.gateway.exceptionHandler;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -18,4 +18,5 @@ import lombok.NoArgsConstructor;
 public class GatewayFail {
     private Integer code;
     private String msg;
+    private String host;
 }

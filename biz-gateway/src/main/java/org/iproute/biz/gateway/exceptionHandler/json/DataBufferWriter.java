@@ -1,4 +1,4 @@
-package org.iproute.biz.gateway.exception.bizjson;
+package org.iproute.biz.gateway.exceptionHandler.json;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;

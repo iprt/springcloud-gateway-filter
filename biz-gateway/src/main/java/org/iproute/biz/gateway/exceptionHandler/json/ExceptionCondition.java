@@ -1,4 +1,4 @@
-package org.iproute.biz.gateway.exception.bizjson;
+package org.iproute.biz.gateway.exceptionHandler.json;
 
 import org.iproute.biz.gateway.BizGatewayApplication;
 import org.springframework.context.annotation.Condition;

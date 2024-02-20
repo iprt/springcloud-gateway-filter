@@ -1,4 +1,4 @@
-package org.iproute.biz.gateway.exception.bized;
+package org.iproute.biz.gateway.exceptionHandler.encrypted;
 
 import lombok.extern.slf4j.Slf4j;
 import org.iproute.biz.gateway.BizGatewayApplication;
